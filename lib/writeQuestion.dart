@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'writeQuestion.dart';
 import 'questionList.dart';
 import 'todayQuestion.dart';
 
@@ -112,66 +111,63 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
       ),
       body: SingleChildScrollView(
         child: Column(
-                children: [
-                  Divider(
-                    thickness: 1,
-                    color: Color(0xff7b7066),
-                  ),
-                  SizedBox(height: 30),
-                  Text(
-                    '2023.11.25',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'NanumMyeongjo',
-                    ),
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Color(0xFF7B7066),
-                    indent: 140,
-                    endIndent: 140,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    '당신의 어릴 적 꿈은?',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'NanumMyeongjo',
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  ElevatedButton(
-                    onPressed:(){
-                      setState(() {
-                        showWriteCard = true;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFF5E0CF),
-                    ),
-                    child:Text(
-                      '답변 추가하기',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'NanumMyeongjo',
-                          color: Color(0xFF000000)
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  if(showWriteCard) writeCardWidget(),
-                  showCardWidget(),
-                  showCardWidget()
-                ],
-
+          children: [
+            Divider(
+              thickness: 1,
+              color: Color(0xff7b7066),
+            ),
+            SizedBox(height: 30),
+            Text(
+              '2023.11.25',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'NanumMyeongjo',
               ),
             ),
-
-      );
+            Divider(
+              thickness: 1,
+              color: Color(0xFF7B7066),
+              indent: 140,
+              endIndent: 140,
+            ),
+            SizedBox(height: 20),
+            Text(
+              '당신의 어릴 적 꿈은?',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'NanumMyeongjo',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed:(){
+                setState(() {
+                  showWriteCard = true;
+                });
+                },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFF5E0CF),
+              ),
+              child:Text(
+                '답변 추가하기',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NanumMyeongjo',
+                    color: Color(0xFF000000)
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            if(showWriteCard) writeCardWidget(),
+            showCardWidget(),
+            showCardWidget()
+          ],
+        ),
+    ),
+    );
   }
 }
 

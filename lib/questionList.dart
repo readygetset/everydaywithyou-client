@@ -1,3 +1,4 @@
+import 'package:everywithu/writeQuestion.dart';
 import 'package:flutter/material.dart';
 
 class questionListWidget extends StatefulWidget {
@@ -31,16 +32,96 @@ class _questionListWidgetState extends State<questionListWidget> {
             fontFamily: 'NanumMyeongjo'
           ),
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Color(0xff7b7066),
-          ),
-          onPressed: ()async{
-            Navigator.pop(context);
-          },
-        ),
       ),// TO DO: scroll view
+        drawer: Drawer(
+          backgroundColor: Color(0xFFF5E0CF),
+          child: ListView(
+              children: [
+                Container(
+                  height: 20,
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.menu,
+                    color: Color(0XFF7B7066),
+                  ),
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Color(0xFF7B7066),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.home,
+                    color: Color(0XFF7B7066),
+                  ),
+                  title: Text(
+                    '홈',
+                    style: TextStyle(
+                      color: Color(0xFF7B7066),
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'NanumMyeongjo',
+                    ),
+                  ),
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Color(0xFF7B7066),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.message,
+                    color: Color(0xFF7B7066),
+                  ),
+                  title: Text(
+                    '질문목록',
+                    style: TextStyle(
+                      color: Color(0xFF7B7066),
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'NanumMyeongjo',
+                    ),
+                  ),
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Color(0xFF7B7066),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.create,
+                    color: Color(0xFF7B7066),
+                  ),
+                  title: Text(
+                    '편지 쓰기',
+                    style: TextStyle(
+                      color: Color(0xFF7B7066),
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'NanumMyeongjo',
+                    ),
+                  ),
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Color(0xFF7B7066),
+                ),
+              ]
+          ),
+        ),
       body: SingleChildScrollView(
         child: Container(
             child:Column(

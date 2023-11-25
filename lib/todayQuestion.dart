@@ -13,8 +13,6 @@ class todayQuestionWidget extends StatefulWidget {
 class _todayQuestionWidgetState extends State<todayQuestionWidget> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xffFFF2E7),
@@ -125,7 +123,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image:Image.asset('assets/png/main.png',
+            image:Image.asset('assets/images/main.png',
               fit: BoxFit.cover
           ).image,
           ),
