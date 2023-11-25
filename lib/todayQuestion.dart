@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'questionList.dart';
+import 'writeQuestion.dart';
+
 
 class todayQuestionWidget extends StatefulWidget {
   const todayQuestionWidget({super.key});
@@ -19,6 +21,17 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
       appBar: AppBar(
         backgroundColor: Color(0xFFFFF2E7),
         iconTheme: IconThemeData(color: Color(0XFF7B7066)),
+        actions: [
+        IconButton(
+          onPressed: (){
+
+        },
+        icon: Icon(
+          Icons.email,
+          color: Color(0xFF7B7066),
+        ),
+        )
+      ]
       ),
       drawer: Drawer(
         backgroundColor: Color(0xFFF5E0CF),
@@ -206,7 +219,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
             ),
             ElevatedButton(
                 onPressed: ()async{
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFF5E0CF),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'writeQuestion.dart';
+import 'questionList.dart';
+import 'todayQuestion.dart';
 
 class writeQuestionWidget extends StatefulWidget {
   const writeQuestionWidget({super.key});
@@ -15,19 +18,100 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
     return Scaffold(
       backgroundColor: Color(0xFFFFF2E7),
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: Color(0xFFFFF2E7),
-        leading: IconButton(
-          color: Color(0xFF7B7066),
-          icon: Icon(Icons.menu),
-          onPressed: ()async{
-          },
+        iconTheme: IconThemeData(color: Color(0XFF7B7066)),
+      ),
+      drawer: Drawer(
+        backgroundColor: Color(0xFFF5E0CF),
+        child: ListView(
+            children: [
+              Container(
+                height: 20,
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.menu,
+                  color: Color(0XFF7B7066),
+                ),
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>todayQuestionWidget()));
+                },
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xFF7B7066),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                  color: Color(0XFF7B7066),
+                ),
+                title: Text(
+                  '홈',
+                  style: TextStyle(
+                    color: Color(0xFF7B7066),
+                    fontSize: 28,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NanumMyeongjo',
+                  ),
+                ),
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>todayQuestionWidget()));
+                },
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xFF7B7066),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.message,
+                  color: Color(0xFF7B7066),
+                ),
+                title: Text(
+                  '질문목록',
+                  style: TextStyle(
+                    color: Color(0xFF7B7066),
+                    fontSize: 28,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NanumMyeongjo',
+                  ),
+                ),
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                },
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xFF7B7066),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.create,
+                  color: Color(0xFF7B7066),
+                ),
+                title: Text(
+                  '편지 쓰기',
+                  style: TextStyle(
+                    color: Color(0xFF7B7066),
+                    fontSize: 28,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NanumMyeongjo',
+                  ),
+                ),
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                },
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xFF7B7066),
+              ),
+            ]
         ),
       ),
-      body:
-    SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
-
                 children: [
                   Divider(
                     thickness: 1,
