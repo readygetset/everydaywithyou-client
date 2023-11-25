@@ -106,39 +106,6 @@ class showCardWidget extends StatelessWidget {
   final String answer = '';
 
   @override
-  /*
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
-      child: Card(
-        color: Color(0xFFFFFFFF),
-        child: Container(
-            width: 350,
-            height: 100,
-            child: Row(
-              children: [
-                Container(
-                  width: 22,
-                  color: Color(0xFFE8D8CB),
-                ),
-               SizedBox(width: 100),
-               Text(
-                    '당신의 어릴 적 꿈은?',
-                    style: TextStyle(
-                      fontFamily: 'NanumMyeongjo',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-                  ],
-                )
-            )
-        ),
-    );
-  }
-}
-*/
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
