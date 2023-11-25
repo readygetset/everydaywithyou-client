@@ -59,14 +59,20 @@ class _questionListWidgetState extends State<questionListWidget> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(999),
                           borderSide: BorderSide(
-                            color: Color(0xffFFF9F5),
-                          )
+                            color: Colors.transparent,
+                          ),
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(999),
                           borderSide: BorderSide(
                             color: Color(0xffFFF9F5),
-                          )
+                          ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(999),
+                        borderSide: BorderSide(
+                          color: Colors.transparent, // Set the initial border color
+                        ),
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(Icons.search),
@@ -100,11 +106,12 @@ class showCardWidget extends StatelessWidget {
   final String answer = '';
 
   @override
+  /*
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(39, 20, 39, 20),
+      padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
       child: Card(
-        color: Color(0xFFFFF9F5),
+        color: Color(0xFFFFFFFF),
         child: Container(
             width: 350,
             height: 100,
@@ -112,7 +119,7 @@ class showCardWidget extends StatelessWidget {
               children: [
                 Container(
                   width: 22,
-                  color: Color(0xFFF5E0CF),
+                  color: Color(0xFFE8D8CB),
                 ),
                SizedBox(width: 100),
                Text(
@@ -128,6 +135,60 @@ class showCardWidget extends StatelessWidget {
                 )
             )
         ),
+    );
+  }
+}
+*/
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
+      child: Card(
+        color: Colors.white, // Set the overall card color to white
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          width: 350,
+          height: 100,
+          child: Stack(
+            children: [
+              // Brown-colored section on the left
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: 22,
+                child: Container(
+                  color: Color(0xFFE8D8CB),
+                ),
+              ),
+              // White section on the right with text
+              Positioned(
+                left: 22,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  color: Color(0xFFFFF9F5),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '당신의 어릴 적 꿈은?',
+                      style: TextStyle(
+                        fontFamily: 'NanumMyeongjo',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
