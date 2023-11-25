@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'questionList.dart';
+import 'writeQuestion.dart';
 import 'todayQuestion.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: todayQuestionWidget()
+      home: writeQuestionWidget()
     );
   }
 }
