@@ -1,16 +1,11 @@
-# 매일그대와
+# 매일 그대와
 
-A new Flutter project.
+**동기**
 
-## Getting Started
+많은 나라는 삶을 의미있게 하는 가장 큰 요소로 가족을 뽑는 반면 한국에서는 물질적 풍요를 첫 순위로 뽑았다. 가족의 소중함과 중요성을 일깨워주기 위해 “매일 그대와”를 만들었다. 
 
-This project is a starting point for a Flutter application.
+**기능**
 
-A few resources to get you started if this is your first Flutter project:
+이 앱은 첫번째로 주어진 질문에 각자가 답을 하는 기능이 있다. 이 답은 가족에게 공개되어 서로의 새로운 면을 알 수 있게 해주고 가까워 지게 한다. 두번째로 익명으로 편지를 보내는 기능이 있다. 가볍게 가족에게 마음을 전달할 수 있게 한다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+기존에 없었던 가족 다이어리 형태로써 가족 간의 소통을 촉진하여 더 행복하고, 다채롭고, 건강한 가족 공동체를 추구한다.
