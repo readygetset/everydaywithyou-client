@@ -1,16 +1,85 @@
 import 'package:flutter/material.dart';
 import 'questionList.dart';
 import 'todayQuestion.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'writeLetter.dart';
 
 class writeQuestionWidget extends StatefulWidget {
-  const writeQuestionWidget({super.key});
+  final int questionId;
+
+  const writeQuestionWidget({required this.questionId, Key? key})
+      : super(key: key);
 
   @override
   State<writeQuestionWidget> createState() => _writeQuestionWidgetState();
 }
 
 class _writeQuestionWidgetState extends State<writeQuestionWidget> {
+  TextEditingController? questionController = TextEditingController();
+
   bool showWriteCard = false;
+  late String questionText = '';
+  List<Map<String, dynamic>> answerList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchQuestion();
+    fetchAnswer();
+  }
+
+  Future<void> submitAnswer() async {
+    final String answerText = questionController?.text ?? '';
+
+    if (answerText.isNotEmpty) {
+      final Map<String, dynamic> requestBody = {
+        "answer": answerText,
+      };
+
+      final Uri url = Uri.parse('http://51.20.65.21:8080/answer/${widget.questionId}/4');
+
+      final http.Response response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Answer submitted successfully, you may want to update the UI or show a success message
+        print('Answer submitted successfully');
+      } else {
+        // Handle the error when the answer submission fails
+        print('Answer submission failed: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    }
+  }
+
+  Future<void> fetchQuestion() async {
+    final response = await http.get(Uri.parse('http://51.20.65.21:8080/question/1/${widget.questionId}'));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(utf8.decode(response.bodyBytes));
+      setState(() {
+        questionText = responseData['question'];
+      });
+    } else {
+      print('요청 실패: ${response.statusCode}');
+    }
+  }
+  Future<void> fetchAnswer() async {
+    final response = await http.get(Uri.parse('http://51.20.65.21:8080/answer?familyId=1&questionId=${widget.questionId}'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = json.decode(utf8.decode(response.bodyBytes));
+      setState((){
+        answerList = List<Map<String, dynamic>>.from(responseData);
+      });
+    } else {
+      print('요청 실패: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +168,7 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
                   ),
                 ),
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeLetter()));
                 },
               ),
               Divider(
@@ -116,15 +185,7 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
               thickness: 1,
               color: Color(0xff7b7066),
             ),
-            SizedBox(height: 30),
-            Text(
-              '2023.11.25',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'NanumMyeongjo',
-              ),
-            ),
+            SizedBox(height: 50),
             Divider(
               thickness: 1,
               color: Color(0xFF7B7066),
@@ -132,12 +193,17 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
               endIndent: 140,
             ),
             SizedBox(height: 20),
-            Text(
-              '당신의 어릴 적 꿈은?',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'NanumMyeongjo',
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 45), // Set margin
+              child: Text(
+                questionText,
+                style: TextStyle(
+                  fontFamily: 'NanumMyeongjo',
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24,
+                ),
+                textAlign: TextAlign.center, // Center-align the text
               ),
             ),
             SizedBox(height: 20),
@@ -161,9 +227,12 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
               ),
             ),
             SizedBox(height: 20),
-            if(showWriteCard) writeCardWidget(),
-            showCardWidget(),
-            showCardWidget()
+            if (showWriteCard) writeCardWidget(submitAnswer, questionController),
+            for (var answerData in answerList)
+              showCardWidget(
+                answerData['memberName'],
+                answerData['answer'],
+              ),
           ],
         ),
     ),
@@ -173,14 +242,17 @@ class _writeQuestionWidgetState extends State<writeQuestionWidget> {
 
 
 class writeCardWidget extends StatefulWidget {
-  const writeCardWidget({super.key});
+  final VoidCallback submitAnswer;
+  final TextEditingController? questionController;
+
+  const writeCardWidget(this.submitAnswer, this.questionController, {super.key});
 
   @override
   State<writeCardWidget> createState() => _writeCardWidgetState();
 }
 
 class _writeCardWidgetState extends State<writeCardWidget> {
-  TextEditingController? questionController = TextEditingController();
+  //TextEditingController? questionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -188,16 +260,37 @@ class _writeCardWidgetState extends State<writeCardWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 15), // Adjust the margin as needed
-            child: Text(
-              '막둥이',
-              style: TextStyle(
-                fontFamily: 'NanumMyeongjo',
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
+          Row(
+            children:[
+              Container(
+              margin: EdgeInsets.symmetric(horizontal: 15), // Adjust the margin as needed
+              child: Text(
+                '막둥이',
+                style: TextStyle(
+                  fontFamily: 'NanumMyeongjo',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
               ),
             ),
+              SizedBox(width: 150),
+              ElevatedButton(
+                onPressed: widget.submitAnswer,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFF5E0CF),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                ),
+                child: Text(
+                  '제출',
+                  style: TextStyle(
+                    fontFamily: 'NanumMyeongjo',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              )
+            ]
           ),
           Card(
             color: Colors.white, // Set the overall card color to white
@@ -243,7 +336,7 @@ class _writeCardWidgetState extends State<writeCardWidget> {
                             ),
                           ),
                           textAlign: TextAlign.center, // Center-align the text
-                          controller: questionController,
+                          controller: widget.questionController,
                           style: TextStyle(
                             fontFamily: 'NanumMyeongjo',
                             fontWeight: FontWeight.w500,
@@ -268,8 +361,10 @@ class _writeCardWidgetState extends State<writeCardWidget> {
 
 
 class showCardWidget extends StatelessWidget {
-  const showCardWidget({super.key});
-  final String name = '';
+  final String memberName;
+  final String answer;
+
+  showCardWidget(this.memberName, this.answer, {Key? key}) : super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +382,7 @@ class showCardWidget extends StatelessWidget {
               ),
               SizedBox(height: 15),
               Text(
-              '막둥이',
+              memberName,
               style: TextStyle(
                 fontFamily: 'NanumMyeongjo',
                 fontWeight: FontWeight.w500,
@@ -329,7 +424,7 @@ class showCardWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '대통령',
+                        answer,
                         style: TextStyle(
                           fontFamily: 'NanumMyeongjo',
                           fontWeight: FontWeight.w500,
