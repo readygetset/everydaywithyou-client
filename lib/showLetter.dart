@@ -132,7 +132,7 @@ class _showLetterState extends State<showLetter> {
                 height: 500,
                 width: 350,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFF9F5),
+                  color: Color(0xFFFFF2E7),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -148,11 +148,11 @@ class _showLetterState extends State<showLetter> {
                     ),
                     SizedBox(width: 20),
                     Text(
-                      '익명의 사과 메세지',
+                      '익명의 메세지',
                       style: TextStyle(
                         fontFamily: 'NanumMyeongjo',
                         fontWeight: FontWeight.w500,
-                        fontSize: 15,
+                        fontSize: 20,
                         color: Color(0xFF000000),
                       ),
                     ),
@@ -166,7 +166,7 @@ class _showLetterState extends State<showLetter> {
                   height: 400,
                   width: 300,
                   decoration: BoxDecoration(
-                    color: Color(0xFFF5E0CF),
+                    color: Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -175,12 +175,12 @@ class _showLetterState extends State<showLetter> {
                 top: 90,
                 left: 30,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  padding: EdgeInsets.fromLTRB(20, 10, 10, 0),
                   child: RichText(
                     overflow: TextOverflow.ellipsis,
                     maxLines: 8,
                     text: TextSpan(
-                      text: '엄마,\n미안해\n다음번에는 안그럴게 봐줘.',
+                      text: '딸, 잘 지내고 있지?\n조만간 들릴게\n',
                       style: TextStyle(
                         fontFamily: 'NanumMyeongjo',
                         fontWeight: FontWeight.w500,
@@ -200,7 +200,7 @@ class _showLetterState extends State<showLetter> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFF9F5),
+                    backgroundColor: Color(0xFFF5E0CF),
                     elevation: 0,
                   ),
                   child: Text(

@@ -146,7 +146,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
                     '매일',
                     style: TextStyle(
                       fontFamily: 'NanumMyeongjo',
-                      fontSize: 64,
+                      fontSize: 60,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.right,
@@ -163,7 +163,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
                     '그대와',
                     style: TextStyle(
                       fontFamily: 'NanumMyeongjo',
-                      fontSize: 64,
+                      fontSize: 60,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.right,
@@ -189,7 +189,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
               style: TextStyle(
                 color: Color(0xFF000000),
                 fontWeight: FontWeight.w500,
-                fontSize: 32,
+                fontSize: 28,
                 fontFamily: 'NanumMyeongjo',
               ),
             ),

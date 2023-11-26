@@ -399,7 +399,7 @@ class showCardWidget extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           child: Container(
             width: 350,
-            height: 100,
+            height: 150,
             child: Stack(
               children: [
                 // Brown-colored section on the left

@@ -212,34 +212,68 @@ class _writeLetterState extends State<writeLetter> {
                       SizedBox(height: 250),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFFFF9F5),
+                            backgroundColor: Color(0xFFF5E0CF),
                             elevation: 0,
                           ),
-                        onPressed: (){
-                          showAboutDialog(
-                            context: context,
-                            children: [
-                              Text(
-                                '사과가 전달되었습니다.',
-                                textAlign: TextAlign.center,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: ((context) {
+                                return AlertDialog(
+                                    backgroundColor: Color(0xFFFFFFFF),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '편지가 전달되었습니다.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: 'NanumMyeongjo',
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18,
+                                              height: 3
+                                          ),
+                                        ),
+                                        Image.asset(
+                                          'assets/images/letter.png',
+                                          height: 60,
+                                        )
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      Container(
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(); //창 닫기
+                                          },
+                                          child: Text(
+                                              "확인",
+                                              style: TextStyle(
+                                                  fontFamily: 'NanumMyeongjo',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                  color: Color(0xFF000000)
+                                              )
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                );
+                              }),
+                            );
+                          },
+                              child: Text(
+                                '편지 보내기',
                                 style: TextStyle(
                                   fontFamily: 'NanumMyeongjo',
                                   fontWeight: FontWeight.w500,
                                   fontSize: 18,
+                                  color: Color(0xFF000000)
                                 ),
-                              ),
-                              ]
-                          );
-                          },
-                          child: Text(
-                            '사과 보내기',
-                            style: TextStyle(
-                              fontFamily: 'NanumMyeongjo',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: Color(0xFF000000)
-                            ),
-                          ))
+                              )
+
+                            )
                       ]
                     ),
                     ),
