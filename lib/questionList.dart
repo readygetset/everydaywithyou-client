@@ -1,5 +1,9 @@
 import 'package:everywithu/writeQuestion.dart';
 import 'package:flutter/material.dart';
+import 'todayQuestion.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'writeLetter.dart';
 
 class questionListWidget extends StatefulWidget {
   const questionListWidget({Key? key}) : super(key: key);
@@ -11,11 +15,40 @@ class questionListWidget extends StatefulWidget {
 class _questionListWidgetState extends State<questionListWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController? searchController = TextEditingController();
+  List<Map<String, dynamic>> questionList = [];
 
   @override
   void initState(){
     super.initState();
+    fetchData();
   }
+
+  Future<void> fetchData() async {
+    final response = await http.get(Uri.parse('http://51.20.65.21:8080/question/1'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = json.decode(utf8.decode(response.bodyBytes));
+      setState((){
+        questionList = List<Map<String, dynamic>>.from(responseData);
+      });
+    } else {
+      print('요청 실패: ${response.statusCode}');
+    }
+  }
+
+  Future<void> searchQuestions(String keyword) async {
+    final response = await http.get(Uri.parse('http://51.20.65.21:8080/question/find?familyId=1&keyword=${keyword}'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = json.decode(utf8.decode(response.bodyBytes));
+      setState(() {
+        questionList = List<Map<String, dynamic>>.from(responseData);
+      });
+    } else {
+      print('검색 실패: ${response.statusCode}');
+    }
+  }
+
+
+
 
 
   @override
@@ -46,7 +79,7 @@ class _questionListWidgetState extends State<questionListWidget> {
                     color: Color(0XFF7B7066),
                   ),
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
+
                   },
                 ),
                 Divider(
@@ -68,7 +101,7 @@ class _questionListWidgetState extends State<questionListWidget> {
                     ),
                   ),
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>todayQuestionWidget()));
                   },
                 ),
                 Divider(
@@ -112,7 +145,7 @@ class _questionListWidgetState extends State<questionListWidget> {
                     ),
                   ),
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeLetter()));
                   },
                 ),
                 Divider(
@@ -160,6 +193,7 @@ class _questionListWidgetState extends State<questionListWidget> {
                         color: Color(0xFF7B7066),
                         iconSize: 25,
                         onPressed: (){
+                          searchQuestions(searchController?.text ?? '');
                           //TO DO
                           //쿼리 보내기
                         },
@@ -172,9 +206,11 @@ class _questionListWidgetState extends State<questionListWidget> {
                     ),
                   ),
                 ),
-                showCardWidget(),
-                showCardWidget(),
-                showCardWidget()
+                for (var questionData in questionList)
+                  showCardWidget(
+                      questionData['questionId'],
+                      questionData['question'],
+                  ),
               ],
             ),
         )
@@ -183,60 +219,73 @@ class _questionListWidgetState extends State<questionListWidget> {
   }
 }
 class showCardWidget extends StatelessWidget {
-  const showCardWidget({super.key});
-  final String answer = '';
+  final int questionId;
+  final String question;
+
+  showCardWidget(this.questionId, this.question, {Key? key}) : super(key:key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
-      child: Card(
-        color: Colors.white, // Set the overall card color to white
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          width: 350,
-          height: 100,
-          child: Stack(
-            children: [
-              // Brown-colored section on the left
-              Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: 22,
-                child: Container(
-                  color: Color(0xFFE8D8CB),
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => writeQuestionWidget(questionId: questionId),
+            ),
+          );
+        },
+      child: Container(
+        padding: EdgeInsets.fromLTRB(39, 5, 39, 5),
+        child: Card(
+          color: Colors.white, // Set the overall card color to white
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            width: 350,
+            height: 100,
+            child: Stack(
+              children: [
+                // Brown-colored section on the left
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 22,
+                  child: Container(
+                    color: Color(0xFFE8D8CB),
+                  ),
                 ),
-              ),
-              // White section on the right with text
-              Positioned(
-                left: 22,
-                top: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  color: Color(0xFFFFF9F5),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      '당신의 어릴 적 꿈은?',
-                      style: TextStyle(
-                        fontFamily: 'NanumMyeongjo',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
+                // White section on the right with text
+                Positioned(
+                  left: 22,
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    color: Color(0xFFFFF9F5),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        question,
+                        style: TextStyle(
+                          fontFamily: 'NanumMyeongjo',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }
+
+

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'questionList.dart';
 import 'writeQuestion.dart';
+import 'showLetter.dart';
+import 'writeLetter.dart';
 
 
 class todayQuestionWidget extends StatefulWidget {
@@ -22,10 +24,10 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
         actions: [
         IconButton(
           onPressed: (){
-
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>showLetter()));
         },
         icon: Icon(
-          Icons.email,
+          Icons. mark_email_unread,
           color: Color(0xFF7B7066),
         ),
         )
@@ -110,7 +112,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
                 ),
               ),
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>questionListWidget()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeLetter()));
               },
             ),
             Divider(
@@ -144,7 +146,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
                     '매일',
                     style: TextStyle(
                       fontFamily: 'NanumMyeongjo',
-                      fontSize: 64,
+                      fontSize: 60,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.right,
@@ -161,7 +163,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
                     '그대와',
                     style: TextStyle(
                       fontFamily: 'NanumMyeongjo',
-                      fontSize: 64,
+                      fontSize: 60,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.right,
@@ -187,20 +189,24 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
               style: TextStyle(
                 color: Color(0xFF000000),
                 fontWeight: FontWeight.w500,
-                fontSize: 32,
+                fontSize: 28,
                 fontFamily: 'NanumMyeongjo',
               ),
             ),
             SizedBox(
               height: 15
             ),
-            Text(
-              '당신의 어릴 적 꿈은?',
-              style: TextStyle(
-                fontFamily: 'NanumMyeongjo',
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.w500,
-                fontSize: 24,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 45), // Set margin
+              child: Text(
+                '당신의 어릴 적 장래희망은 무엇이었나요?',
+                style: TextStyle(
+                  fontFamily: 'NanumMyeongjo',
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 22,
+                ),
+                textAlign: TextAlign.center, // Center-align the text
               ),
             ),
             SizedBox(
@@ -217,7 +223,7 @@ class _todayQuestionWidgetState extends State<todayQuestionWidget> {
             ),
             ElevatedButton(
                 onPressed: ()async{
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>writeQuestionWidget(questionId:4)));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFF5E0CF),
