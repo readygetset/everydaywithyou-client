@@ -1,11 +1,11 @@
-# 매일 그대와
+# EverydayWithYou Client
+> This project was conducted as part of the 2023 Korea University College of Informatics Hackathon, "InThon."
 
-**동기**
+## Motivation
+In many countries, family is considered the most meaningful aspect of life, while in South Korea, material wealth often ranks first. To emphasize the importance and value of family, we created "Everyday with You."
 
-많은 나라는 삶을 의미있게 하는 가장 큰 요소로 가족을 뽑는 반면 한국에서는 물질적 풍요를 첫 순위로 뽑았다. 가족의 소중함과 중요성을 일깨워주기 위해 “매일 그대와”를 만들었다. 
-
-**기능**
-
-이 앱은 첫번째로 주어진 질문에 각자가 답을 하는 기능이 있다. 이 답은 가족에게 공개되어 서로의 새로운 면을 알 수 있게 해주고 가까워 지게 한다. 두번째로 익명으로 편지를 보내는 기능이 있다. 가볍게 가족에게 마음을 전달할 수 있게 한다.
-
-기존에 없었던 가족 다이어리 형태로써 가족 간의 소통을 촉진하여 더 행복하고, 다채롭고, 건강한 가족 공동체를 추구한다.
+## Features
+This app offers two main features to enhance family connection and understanding:
+1. **Question and Answer**: Each user can answer a daily question, and their responses are shared within the family. This allows family members to discover new aspects of each other and deepen their bonds.
+2. **Anonymous Letters**: Users can send anonymous letters to their family members, making it easy to share thoughts and feelings in a light-hearted way.
+By promoting open communication within a unique family diary format, "Everyday with You" fosters a happier, more vibrant, and healthier family community.
